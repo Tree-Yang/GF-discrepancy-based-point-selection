@@ -101,9 +101,21 @@ function asgn_prob = AsgnProb(rps, distr_para, n_mcs)
     %-------------------------------------------------------------
     % Method II: tabulate - fast
     % Date : 2020-01-03
+    % Update: 2023-09-25
+    % Sometimes, some representative points cannot be indexed by `knnsearch`.
+    % In other words, the not indexed representative points are too far 
+    %       from the Monte Carlo points, such that they are not nearest neighboors
+    %       of any Monte Carlo point.
+    % Then, the length of asgn_prob will not be equal to the number of representative points.
+    % This problem is fixed by considering the first column of the output of `tabulate` function
     %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    % number of representative points
+    [n_rps,~] = size(rps);
+    % initialize a vector for assigned probability
+    asgn_prob = zeros(n_rps, 1);
+    % count the frequency number of representative points
     tmp0 = tabulate(tmp);
-    asgn_prob = tmp0(:,2);
+    asgn_prob(int64(tmp0(:,1))) = tmp0(:,2);
     % toc
     %==============================================================
 
