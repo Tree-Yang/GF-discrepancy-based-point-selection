@@ -29,7 +29,8 @@ function discr = GFDiscr(rps, distr_para, asgn_prob)
     cdf_ed = zeros(size(rps));
     for jj = 1:1:n_rps
         rps0 = rps;
-        ind_tmp       = heaviside(repmat(rps0(jj,:), n_rps, 1)-rps0);
+        % ind_tmp       = heaviside(repmat(rps0(jj,:), n_rps, 1)-rps0);
+        ind_tmp       = (repmat(rps0(jj,:), n_rps, 1)-rps0) >= 0.0;
         cdf_ed(jj, :) = asgn_prob' * ind_tmp;
     end
     
