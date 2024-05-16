@@ -130,8 +130,8 @@ function [rps,asgn_prob] = GFDiscr_RPS(distr_para,n_rps)
             error('Wrong type for distribution!');
         end
     end
-    %assigned probability
-    asgn_prob = AsgnProb(p_3,distr_para,n_mcs);
+    % %assigned probability
+    % asgn_prob = AsgnProb(p_3,distr_para,n_mcs);
     %view the point set
     if strcmpi(view_opt, 'on')
         figure;
